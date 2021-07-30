@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use DB;
+use Hash;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,6 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        DB::table('users')->insert([
+            'name' => "Ricquebourg",
+            'email' => "xricquebourgpro@gmail.com",
+            'password' => Hash::make('password'),
+        ]);
     }
 }
