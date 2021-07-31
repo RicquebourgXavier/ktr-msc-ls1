@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BusinesscardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard',[BusinesscardController::class, 'index'] )->middleware(['auth'])->name('dashboard');
 
-Route::view('/profil','profil')->middleware(['auth'])->name('profil');
-Route::post('/profil',[UserController::class, 'update'])->middleware(['auth']);
+Route::view('/profile','profile')->middleware(['auth'])->name('profile');
+
+Route::view('/library','library')->middleware(['auth'])->name('library');
+
+Route::post('/profile',[UserController::class, 'update'])->middleware(['auth']);
+
+Route::post('/library',[BusinesscardController::class, 'store'])->middleware(['auth']);
+
 require __DIR__.'/auth.php';
